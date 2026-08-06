@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
+    <title>Cheris Quessou | Game Developer Portfolio</title>
     <style>
-        /* =========================================
-           VARIABLES & RESET
-        ========================================= */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         :root {
-            --bg-color: #0d0d0f;
-            --card-bg: #151518;
-            --text-light: #f5f5f7;
-            --text-muted: #9ca3af;
-            --accent: #ffffff;
-            --divider: #333333;
-            --transition-speed: 0.4s;
+            --bg-color: #0b0c0e;
+            --card-bg: #12141a;
+            --card-border: #1e222d;
+            --card-hover-border: #c84b13;
+            --accent-orange: #c84b13;
+            --accent-orange-glow: rgba(200, 75, 19, 0.25);
+            --accent-orange-light: #e06024;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(200, 75, 19, 0.12);
+            --transition-speed: 0.35s;
         }
 
         * {
@@ -26,383 +27,339 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
+        html, body {
+            width: 100%;
+            height: 100%;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-light);
-            line-height: 1.6;
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* Custom Scrollbar for dark theme */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-color);
         }
         ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 5px;
+            background: #252834;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #3b3f52;
         }
 
-        /* =========================================
-           HERO SECTION
-        ========================================= */
-        .hero-section {
+        .app-container {
+            width: 100%;
             height: 100vh;
-            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, #1a1a24 0%, var(--bg-color) 70%);
-        }
-
-        .hero-section h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section p {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            font-weight: 300;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            cursor: pointer;
-            animation: bounce 2s ease-in-out infinite;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background var(--transition-speed) ease;
-        }
-
-        .scroll-indicator:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .scroll-indicator svg {
-            width: 32px;
-            height: 32px;
-            fill: none;
-            stroke: var(--text-light);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
-
-        /* =========================================
-           MAIN CONTENT AREA
-        ========================================= */
-        .content-area {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 4rem 2rem;
+            padding: 1.5rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
             position: relative;
         }
 
         .view {
             display: none;
             width: 100%;
-            max-width: 1400px;
+            height: 100%;
             opacity: 0;
         }
 
         .view.active {
             display: flex;
             flex-direction: column;
-            align-items: center;
             animation: fadeIn var(--transition-speed) ease-in-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* =========================================
-           CARDS LAYOUT (3 Projects Side-by-Side)
-        ========================================= */
-        .cards-container {
+        .header-bar {
             display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            width: 100%;
-            height: 65vh;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            padding: 0.85rem 1.4rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .header-left p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .header-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tag-pill {
+            background: rgba(200, 75, 19, 0.08);
+            border: 1px solid rgba(200, 75, 19, 0.25);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .tag-pill::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+        }
+
+        .dashboard-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            min-height: 0;
+        }
+
+        .games-grid {
+            flex: 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            min-height: 0;
         }
 
         .card {
-            flex: 1;
-            height: 100%;
             background-color: var(--card-bg);
-            border: 1px solid #2a2a30;
-            border-radius: 24px;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 3rem;
+            justify-content: space-between;
             cursor: pointer;
-            transition: var(--transition-speed) ease-in-out;
-            color: var(--text-light);
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 600;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(200, 75, 19, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
         }
 
-        .divider {
-            width: 60px;
-            height: 3px;
-            background-color: var(--text-light);
-            margin: 2.5rem auto;
-            border-radius: 2px;
-            transition: background var(--transition-speed) ease-in-out;
+        .card-header-badge {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #ffffff;
+            background: var(--accent-orange);
+            padding: 0.35rem 0.85rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(200, 75, 19, 0.25);
         }
 
-        .card p {
-            font-size: 1.1rem;
+        .card-body h2 {
+            font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .card-body p {
+            font-size: 0.92rem;
             color: var(--text-muted);
-            transition: color var(--transition-speed) ease-in-out;
+            font-weight: 400;
         }
 
-        /* About Me Horizontal Card */
-        .about-banner-card {
-            width: 100%;
-            height: 18vh;
-            background-color: var(--card-bg);
-            border: 1px solid #2a2a30;
-            border-radius: 24px;
+        .card-footer-action {
             display: flex;
-            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 1rem;
+        }
+
+        .card-footer-action span:last-child {
+            color: var(--accent-orange-light);
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed);
+        }
+
+        .card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(200, 75, 19, 0.18), 0 4px 12px rgba(0, 0, 0, 0.8);
+            background-color: #161821;
+        }
+
+        .card:hover .card-footer-action span {
+            transform: translateX(5px);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .about-banner-card {
+            flex: 1;
+            min-height: 100px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 4rem;
+            padding: 1.25rem 2rem;
             cursor: pointer;
-            transition: var(--transition-speed) ease-in-out;
-            color: var(--text-light);
-            text-align: left;
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .about-banner-card .about-left {
-            display: flex;
-            flex-direction: column;
+        .about-banner-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
+            background-color: #161821;
+            box-shadow: 0 10px 25px rgba(200, 75, 19, 0.15);
         }
 
-        .about-banner-card h2 {
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
-            font-weight: 600;
+        .about-banner-info h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
         }
 
-        .about-banner-card p {
-            font-size: 1.1rem;
+        .about-banner-info p {
+            font-size: 0.88rem;
             color: var(--text-muted);
-            margin-top: 0.5rem;
-            transition: color var(--transition-speed) ease-in-out;
         }
 
-        .about-banner-card .divider-horizontal {
-            width: 3px;
-            height: 40px;
-            background-color: var(--text-light);
-            margin: 0 2rem;
-            transition: background-color var(--transition-speed) ease-in-out;
+        .about-action-btn {
+            background: linear-gradient(135deg, #c84b13 0%, #e06024 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.6rem;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            transition: all var(--transition-speed);
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(200, 75, 19, 0.3);
         }
 
-        .about-banner-card .about-right-hint {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color var(--transition-speed) ease-in-out;
+        .about-banner-card:hover .about-action-btn {
+            transform: scale(1.03);
+            background: linear-gradient(135deg, #d8561d 0%, #e86c30 100%);
+            box-shadow: 0 6px 20px rgba(200, 75, 19, 0.45);
         }
 
-        /* Card Hover Effects */
-        .card:hover, .about-banner-card:hover {
-            background-color: var(--text-light);
-            color: var(--bg-color);
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .card:hover p, .about-banner-card:hover p, .about-banner-card:hover .about-right-hint {
-            color: #333333;
-        }
-
-        .card:hover .divider {
-            background-color: var(--bg-color);
-        }
-
-        .about-banner-card:hover .divider-horizontal {
-            background-color: var(--bg-color);
-        }
-
-        /* =========================================
-           EXPANDED VIEWS
-        ========================================= */
-        .expanded-card {
+        .expanded-view-container {
             width: 100%;
-            min-height: 85vh;
-            background-color: transparent;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0 4rem;
+        }
+
+        .view-navigation-bar {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
-            padding: 2rem;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            background: rgba(11, 12, 14, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .back-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-nav-btn:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange-light);
+            background: #181b24;
+            transform: translateX(-3px);
         }
 
         .expanded-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
-            margin-top: 2rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
         }
 
-        .expanded-content {
-            max-width: 1000px;
-            margin: 2rem auto;
-            font-size: 1.2rem;
+        .expanded-subtitle {
+            font-size: 1.05rem;
             color: var(--text-muted);
-        }
-
-        /* Interactive Contact Section inside About Me */
-        .contact-inside-about {
-            margin: 3rem auto 0;
-            padding: 3rem;
-            width: 100%;
             max-width: 900px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #2a2a30;
-            border-radius: 20px;
-            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 2rem;
         }
 
-        .contact-inside-about h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .contact-info-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--card-bg);
-            padding: 2rem 1.5rem;
-            border-radius: 12px;
-            border: 1px solid #2a2a30;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-            cursor: pointer;
-            min-height: 120px;
-        }
-
-        .contact-info-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--text-light);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .contact-info-card h4 {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info-card:hover h4 {
-            color: var(--text-light);
-        }
-
-        .contact-info-card p {
-            font-size: clamp(0.75rem, 1.1vw, 0.95rem);
-            color: var(--text-light);
-            font-weight: 600;
-            width: 100%;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.4;
-        }
-
-        /* =========================================
-           MEDIA SHOWCASE PLATFORM & FRAMES
-        ========================================= */
         .project-hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            width: 100%;
-            max-width: 1100px;
-            margin: 3rem auto;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .project-hero-image-wrapper, .mechanic-visual {
+        .project-hero-image-wrapper {
             position: relative;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid #2a2a30;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--card-border);
             aspect-ratio: 16/9;
-            background-color: #141419;
+            background-color: #14161f;
         }
 
-        .project-hero-image-wrapper img, .mechanic-visual img {
+        .project-hero-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform var(--transition-speed) ease;
+            transition: transform 0.4s ease;
         }
 
-        .project-hero-image-wrapper:hover img, .mechanic-visual:hover img {
+        .project-hero-image-wrapper:hover img {
             transform: scale(1.04);
         }
 
@@ -411,212 +368,250 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 1.5rem 1.25rem 1rem;
-            color: var(--text-light);
-            font-size: 0.95rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            padding: 1.25rem 1rem 0.75rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
             font-weight: 600;
-            text-align: left;
-            pointer-events: none;
         }
 
-        /* Mechanics Section */
         .mechanics-section-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            margin-top: 4rem;
-            letter-spacing: -0.5px;
+            margin: 3rem 0 1.5rem;
         }
 
         .mechanics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1100px;
-            margin: 3rem auto;
-            text-align: left;
+            gap: 1.5rem;
         }
 
         .mechanic-card {
             background-color: var(--card-bg);
-            border: 1px solid #222227;
-            border-radius: 24px;
-            padding: 2.5rem;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.75rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            transition: border-color var(--transition-speed);
-        }
-
-        .mechanic-card:hover {
-            border-color: #444;
+            gap: 1.25rem;
         }
 
         .mechanic-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--text-light);
         }
 
         .mechanic-card p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* Buttons */
-        .back-btn {
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            padding: 1rem 3rem;
-            font-size: 1.1rem;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1.5rem;
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .contact-info-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            background: #161821;
+            box-shadow: 0 8px 20px rgba(200, 75, 19, 0.15);
+        }
+
+        .contact-info-card:hover h4 {
+            color: var(--accent-orange-light);
+        }
+
+        .contact-info-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-card p {
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--bg-color);
-            background-color: var(--text-light);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
         }
 
-        .back-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive Constraints */
-        @media (max-width: 900px) {
-            .cards-container {
-                gap: 1rem;
+        /* Responsive Breakpoints */
+        @media (max-width: 960px) {
+            html, body {
                 height: auto;
-                flex-direction: column;
+                overflow-y: auto;
             }
-            .card {
-                width: 100%;
-                height: 350px;
+            .app-container {
+                height: auto;
+                min-height: 100vh;
+                padding: 1.25rem;
+            }
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
             }
             .about-banner-card {
                 flex-direction: column;
-                height: auto;
-                text-align: center;
-                gap: 1.5rem;
-                padding: 2rem;
+                align-items: flex-start;
+                gap: 1rem;
             }
-            .about-banner-card .divider-horizontal {
-                width: 60px;
-                height: 3px;
-                margin: 0 auto;
-            }
-            .project-hero-grid, .mechanics-grid {
+            .project-hero-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. HERO SECTION (Always stays at top) -->
-    <header id="hero" class="hero-section">
-        <h1>Hi, I'm Cheris Quessou</h1>
-        <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-light); font-size: clamp(1.1rem, 2vw, 1.6rem);">I specialise in System Design, Level Design and Technical Design</p>
-        <p style="font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--text-muted); font-weight: 300;">Scroll down and have a look at my work</p>
-        
-        <div class="scroll-indicator" onclick="scrollToContent()">
-            <svg viewBox="0 0 24 24">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </div>
-    </header>
+    <div class="app-container">
 
-    <!-- 2. MAIN CONTENT AREA (Dynamic Views) -->
-    <main id="main-content" class="content-area">
-
-        <!-- VIEW: Home (3 Project Cards + About Banner below) -->
+        <!-- VIEW: Home (One-Page Single View Dashboard) -->
         <div id="view-home" class="view active">
-            <div class="cards-container">
-                <div class="card" onclick="openView('view-game1')">
-                    <h2>Hollow Rooms</h2>
-                    <div class="divider"></div>
-                    <p>Psychological Horror</p>
+            
+            <!-- Compact Header Bar -->
+            <header class="header-bar">
+                <div class="header-left">
+                    <h1>Cheris Quessou</h1>
+                    <p>BSc (Hons) Computer Games Design Graduate</p>
                 </div>
-                <div class="card" onclick="openView('view-game2')">
-                    <h2>Sea Survival S</h2>
-                    <div class="divider"></div>
-                    <p>Isometric Extraction Shooter</p>
+                <div class="header-tags">
+                    <span class="tag-pill">System Design</span>
+                    <span class="tag-pill">Level Design</span>
+                    <span class="tag-pill">Technical Design</span>
                 </div>
-                <div class="card" onclick="openView('view-game3')">
-                    <h2>Sky Islands</h2>
-                    <div class="divider"></div>
-                    <p>Parkour-Based Puzzle Platformer</p>
-                </div>
-            </div>
+            </header>
 
-            <!-- About Me banner placed underneath -->
-            <div class="about-banner-card" onclick="openView('view-about')">
-                <div class="about-left">
-                    <h2>About Me</h2>
-                    <p>My background, skills, and gameplay programming journey.</p>
-                </div>
-                <div class="divider-horizontal"></div>
-                <div class="about-right-hint">
-                    Read Bio & Contact Me →
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW: Expanded About Me -->
-        <div id="view-about" class="view">
-            <div class="expanded-card">
-                <h2 class="expanded-title">About Me</h2>
-                <div class="divider"></div>
-                <div class="expanded-content">
-                    <p style="text-align: center; line-height: 1.8; margin-bottom: 2rem;">I am a BSc (Hons) Computer Games Design student at the University of Staffordshire London with broad knowledge of the full game production pipeline with a strong focus on gameplay systems design. I specialise in Blueprint scripting for interactive mechanics and animation systems, with experience prototyping and implementing gameplay elements into Unreal Engine. I am skilled in level design, system design, iteration, and cross-disciplinary collaboration to bring gameplay ideas to life. I am seeking a role in gameplay or technical design to further develop my systems design expertise within a creative studio environment.</p>
+            <!-- Dashboard Content Container -->
+            <div class="dashboard-content">
+                <!-- 3 Project Cards Side-by-Side -->
+                <div class="games-grid">
                     
-                    <!-- Integrated Contact Details Inside About Me -->
-                    <div class="contact-inside-about">
-                        <h3>Contact Details</h3>
-                        <p style="margin-bottom: 1rem;">Feel free to reach out for work opportunities or collaborations!</p>
-                        
-                        <div class="contact-grid">
-                            <!-- Clickable Card: Email -->
-                            <a href="mailto:quessoucheris144@gmail.com" class="contact-info-card">
-                                <h4>Email</h4>
-                                <p>quessoucheris144@gmail.com</p>
-                            </a>
-                            
-                            <!-- Clickable Card: LinkedIn -->
-                            <a href="https://www.linkedin.com/in/cheris-quessou-3065aa287" target="_blank" class="contact-info-card">
-                                <h4>LinkedIn</h4>
-                                <p>LinkedIn Profile</p>
-                            </a>
-                            
-                            <!-- Clickable Card: GitHub -->
-                            <a href="https://github.com/Cheris-Quessou" target="_blank" class="contact-info-card">
-                                <h4>GitHub</h4>
-                                <p>GitHub Profile</p>
-                            </a>
+                    <!-- Game Card 1 -->
+                    <div class="card" onclick="openView('view-game1')">
+                        <div class="card-header-badge">Unreal Engine 5</div>
+                        <div class="card-body">
+                            <h2>Hollow Rooms</h2>
+                            <p>Psychological Horror & Physical Puzzle Mechanics</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Project</span>
+                            <span>→</span>
                         </div>
                     </div>
+
+                    <!-- Game Card 2 -->
+                    <div class="card" onclick="openView('view-game2')">
+                        <div class="card-header-badge">Production & EQS AI</div>
+                        <div class="card-body">
+                            <h2>Sea Survival S</h2>
+                            <p>Isometric Top-Down Extraction Shooter</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Project</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 3 -->
+                    <div class="card" onclick="openView('view-game3')">
+                        <div class="card-header-badge">OOP & Blueprint Architecture</div>
+                        <div class="card-body">
+                            <h2>Sky Islands</h2>
+                            <p>Parkour-Based Puzzle Platformer</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Project</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+
                 </div>
-                <button class="back-btn" onclick="openView('view-home')">Back</button>
+
+                <!-- Bottom Banner: About Me & Contact -->
+                <div class="about-banner-card" onclick="openView('view-about')">
+                    <div class="about-banner-info">
+                        <h2>About Me & Contact Details</h2>
+                        <p>Background, gameplay programming journey, skills, and direct contact options.</p>
+                    </div>
+                    <div class="about-action-btn">
+                        View Profile & Contact →
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="view-about" class="view">
+            <div class="expanded-view-container">
+                <div class="view-navigation-bar">
+                    <button class="back-nav-btn" onclick="openView('view-home')">← Back to Dashboard</button>
+                    <span style="font-size:0.9rem; color:var(--text-muted);">Developer Profile</span>
+                </div>
+
+                <h2 class="expanded-title">About Me</h2>
+                <p class="expanded-subtitle">
+                    I am a BSc (Hons) Computer Games Design graduate at the University of Staffordshire London with broad knowledge of the full game production pipeline with a strong focus on gameplay systems design. I specialise in Blueprint scripting for interactive mechanics and animation systems, with experience prototyping and implementing gameplay elements into Unreal Engine. I am skilled in level design, system design, iteration, and cross-disciplinary collaboration to bring gameplay ideas to life. I am seeking a role in gameplay or technical design to further develop my systems design expertise within a creative studio environment.
+                </p>
+
+                <!-- Integrated Contact Cards -->
+                <h3 class="mechanics-section-title">Get In Touch</h3>
+                <div class="contact-grid">
+                    <a href="mailto:quessoucheris144@gmail.com" class="contact-info-card">
+                        <h4>Email</h4>
+                        <p>quessoucheris144@gmail.com</p>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/cheris-quessou-3065aa287" target="_blank" class="contact-info-card">
+                        <h4>LinkedIn</h4>
+                        <p>LinkedIn Profile</p>
+                    </a>
+                    
+                    <a href="https://github.com/Cheris-Quessou" target="_blank" class="contact-info-card">
+                        <h4>GitHub</h4>
+                        <p>GitHub Profile</p>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- VIEW: Game 1 (Hollow Rooms - Showcase) -->
         <div id="view-game1" class="view">
-            <div class="expanded-card">
-                <h2 class="expanded-title">Hollow Rooms</h2>
-                <div class="divider"></div>
-                
-                <div class="expanded-content">
-                    <p>
-                        In <strong>Hollow Rooms</strong>, the player enters a creepy old house, solving intricate puzzles to progress toward the attic and reclaim a lost treasure. Rather than relying on simple scares, this project is designed as a technical demonstration showing how thoughtful animation and dynamic camera transitions can dramatically heighten player engagement and atmospheric immersion.
-                    </p>
+            <div class="expanded-view-container">
+                <div class="view-navigation-bar">
+                    <button class="back-nav-btn" onclick="openView('view-home')">← Back to Dashboard</button>
+                    <span style="font-size:0.9rem; color:var(--text-muted);">Hollow Rooms Showcase</span>
                 </div>
 
-                <!-- Featured Images: PosterMain and PosterMiddle first -->
+                <h2 class="expanded-title">Hollow Rooms</h2>
+                <p class="expanded-subtitle">
+                    In <strong>Hollow Rooms</strong>, the player enters a creepy old house, solving intricate puzzles to progress toward the attic and reclaim a lost treasure. Designed as a technical demonstration showing how thoughtful animation and dynamic camera transitions heighten player engagement and atmospheric immersion.
+                </p>
+
+                <!-- Project Image Pair 1 -->
                 <div class="project-hero-grid">
                     <div class="project-hero-image-wrapper">
                         <img src="Pictures/HR/PosterMain.png" alt="Entering the Old House">
@@ -628,210 +623,176 @@
                     </div>
                 </div>
 
-                <!-- Mechanics Segment -->
-                <h2 class="mechanics-section-title">Core Mechanical Design</h2>
-                <div class="divider" style="margin: 1.5rem auto 3rem;"></div>
-
+                <!-- Mechanics breakdown -->
+                <h3 class="mechanics-section-title">Core Mechanical Design</h3>
                 <div class="mechanics-grid">
-                    <!-- Mechanic 1: Smooth Camera Transitions -->
                     <div class="mechanic-card">
                         <h3>Seamless Camera Transitions</h3>
                         <p>
-                            To maintain continuous atmospheric immersion, transitions between exploration and physical puzzle-solving are entirely fluid. The camera interpolates gracefully to frame the interactive elements, bridging the player's spatial perspective directly with target focus locks.
+                            To maintain continuous atmospheric immersion, transitions between exploration and physical puzzle-solving are entirely fluid. The camera interpolates gracefully to frame interactive elements, bridging spatial perspective directly with target focus locks.
                         </p>
-                        <div class="mechanic-visual">
-                            <img src="Pictures/HR/PosterLeft.png" alt="Seamless Camera Transition Focus">
-                            <div class="image-caption">Camera Change Into Lock Transition</div>
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9; margin-top:0.5rem;">
+                            <img src="Pictures/HR/PosterLeft.png" alt="Camera Focus Lock">
+                            <div class="image-caption">Focus Lock Transition</div>
                         </div>
                     </div>
 
-                    <!-- Mechanic 2: Immersive Item Interaction -->
                     <div class="mechanic-card">
                         <h3>Item Interaction System</h3>
                         <p>
-                            Interaction triggers physical spatial focus where inspectable items hover cleanly in focus depth. Built with detailed item feedback, players can observe physical keys, tools, and visual anomalies up close while maintaining real-time contextual inputs.
+                            Interaction triggers physical spatial focus where inspectable items hover cleanly in focus depth. Built with detailed item feedback, players can observe physical keys, tools, and visual anomalies up close.
                         </p>
-                        <div class="mechanic-visual">
-                            <img src="Pictures/HR/HRLastPhoto.png" alt="3D Item Interaction System">
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9; margin-top:0.5rem;">
+                            <img src="Pictures/HR/HRLastPhoto.png" alt="3D Item Inspection">
                             <div class="image-caption">3D Item Inspection</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Showcase Extra Atmospheric Detail -->
-                <div class="project-hero-grid" style="grid-template-columns: 1fr; max-width: 1100px;">
+                <div class="project-hero-grid" style="grid-template-columns: 1fr; margin-top: 1.5rem;">
                     <div class="project-hero-image-wrapper" style="aspect-ratio: 21/9;">
-                        <img src="Pictures/HR/PosterRight.png" alt="Atmospheric Design & Fog Visuals">
+                        <img src="Pictures/HR/PosterRight.png" alt="Atmospheric Environment">
                         <div class="image-caption">Atmospheric Environment & Volumetric Fog</div>
                     </div>
                 </div>
-
-                <button class="back-btn" onclick="openView('view-home')">Back to Projects</button>
             </div>
         </div>
 
-        <!-- VIEW: Game 2 (Sea Survival S - Showcase) -->
         <div id="view-game2" class="view">
-            <div class="expanded-card">
-                <h2 class="expanded-title">Sea Survival S</h2>
-                <div class="divider"></div>
-                
-                <div class="expanded-content">
-                    <p>
-                        <strong>Sea Survival S</strong> is an isometric top-down extraction shooter where players are deployed into hostile ocean environments. Players must explore, search out, and complete three primary objectives to secure safe extraction before being overrun by an endless, mutating horde of ocean predators.
-                    </p>
+            <div class="expanded-view-container">
+                <div class="view-navigation-bar">
+                    <button class="back-nav-btn" onclick="openView('view-home')">← Back to Dashboard</button>
+                    <span style="font-size:0.9rem; color:var(--text-muted);">Sea Survival S Showcase</span>
                 </div>
 
-                <!-- Showcase Header (Splash Art + Main Gameplay overview) -->
+                <h2 class="expanded-title">Sea Survival S</h2>
+                <p class="expanded-subtitle">
+                    <strong>Sea Survival S</strong> is an isometric top-down extraction shooter where players are deployed into hostile ocean environments. Players must explore, search out, and complete three primary objectives to secure safe extraction before being overrun by an endless, mutating horde.
+                </p>
+
                 <div class="project-hero-grid">
                     <div class="project-hero-image-wrapper">
                         <img src="Pictures/SSS/SSSPhoto1.png" alt="Sea Survival S Splash Art">
                         <div class="image-caption">Game Splash & Promotional Art</div>
                     </div>
                     <div class="project-hero-image-wrapper">
-                        <img src="Pictures/SSS/SSSPhoto2.png" alt="Gameplay Combat Overview">
+                        <img src="Pictures/SSS/SSSPhoto2.png" alt="Isometric Combat Overview">
                         <div class="image-caption">Top-Down Isometric Combat</div>
                     </div>
                 </div>
 
-                <!-- Production & Technical Rework Section -->
-                <h2 class="mechanics-section-title">Production & Key Implementations</h2>
-                <div class="divider" style="margin: 1.5rem auto 3rem;"></div>
-
+                <h3 class="mechanics-section-title">Production & Key Implementations</h3>
                 <div class="mechanics-grid">
-                    <!-- Contribution 1: Group Production Management -->
                     <div class="mechanic-card">
                         <h3>Team Production Leadership</h3>
                         <p>
-                            Fulfilling the role of <strong>Producer</strong> on a 13-member collaborative team, I served as the central node for development scheduling and communication synchronization. I ensured each specialist was aligned on daily milestones and actively assisted cross-functional workflows between the tech, design, and art departments to maintain optimal project velocity.
+                            Fulfilling the role of <strong>Producer</strong> on a 13-member collaborative team, I served as the central node for development scheduling and communication synchronization, ensuring specialists met daily milestones.
                         </p>
                     </div>
 
-                    <!-- Contribution 2: 3D Line-Plane Intersection Aiming -->
                     <div class="mechanic-card">
-                        <h3>Linear Mathematical Aiming Rework</h3>
+                        <h3>3D Aiming Line-Plane Intersection</h3>
                         <p>
-                            Engineered a precise aiming calculations system to map top-down 2D mouse cursor coordinates directly into 3D gameplay trajectories. Using line-plane intersection projections, the projectile system feeds perfectly into crosshair positions regardless of camera pitch changes, achieving smooth and responsive gunplay.
+                            Engineered an aiming system mapping top-down 2D cursor coordinates into 3D gameplay trajectories. Using line-plane intersection projections, projectiles feed perfectly into crosshair positions.
                         </p>
                     </div>
 
-                    <!-- Contribution 3: Advanced Objective OOP Architecture -->
                     <div class="mechanic-card">
-                        <h3>OOP-Based Extraction System</h3>
+                        <h3>OOP Extraction Objective Framework</h3>
                         <p>
-                            Authored a clean, extensible, object-oriented framework to manage interactive objective milestones (e.g., planting charges, pushing carts, and capturing control towers). All objective actors inherit from structured base parents, cleanly reporting progress callbacks to a centralized UI manager.
+                            Authored an extensible object-oriented framework to manage interactive objective milestones (planting charges, pushing carts, capturing towers) cleanly reporting callbacks to a central UI manager.
                         </p>
-                        <div class="mechanic-visual">
-                            <img src="Pictures/SSS/SSSPhoto3.png" alt="Interactive Objectives Demo">
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9;">
+                            <img src="Pictures/SSS/SSSPhoto3.png" alt="Interactive Objectives">
                             <div class="image-caption">Interactive Objectives System</div>
                         </div>
                     </div>
 
-                    <!-- Contribution 4: UE5 EQS Advanced AI Framework -->
                     <div class="mechanic-card">
-                        <h3>Environment Query System (EQS) Enemy AI</h3>
+                        <h3>UE5 EQS Advanced AI Framework</h3>
                         <p>
-                            Integrated Unreal Engine 5's advanced Environment Query System to drive predatory behaviors. AI agents poll spatial pathpoints dynamically, querying optimal paths to surround the player, avoid obstacles, and organize adaptive tactical maneuvers.
+                            Integrated Unreal Engine 5's Environment Query System to drive predatory behaviors. AI agents poll spatial pathpoints dynamically to surround the player and organize adaptive tactical maneuvers.
                         </p>
-                        <div class="mechanic-visual">
-                            <img src="Pictures/SSS/SSSPhoto4.png" alt="EQS Driven Combat Pack">
-                            <div class="image-caption">AI Pathing</div>
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9;">
+                            <img src="Pictures/SSS/SSSPhoto4.png" alt="EQS Pathing AI">
+                            <div class="image-caption">Mutating Hunter AI Pathing</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Supplementary Gameplay Environment Showcase -->
-                <div class="project-hero-grid" style="grid-template-columns: 1fr; max-width: 1100px;">
+                <div class="project-hero-grid" style="grid-template-columns: 1fr; margin-top: 1.5rem;">
                     <div class="project-hero-image-wrapper" style="aspect-ratio: 21/9;">
-                        <img src="Pictures/SSS/SSSPhoto5.png" alt="Tactical Extraction Level Design">
-                        <div class="image-caption">Environmental Navigation And Tactical Level Layout</div>
+                        <img src="Pictures/SSS/SSSPhoto5.png" alt="Environmental Layout">
+                        <div class="image-caption">Environmental Navigation & Tactical Level Layout</div>
                     </div>
                 </div>
-
-                <button class="back-btn" onclick="openView('view-home')">Back to Projects</button>
             </div>
         </div>
 
-        <!-- VIEW: Game 3 (Sky Islands - Showcase) -->
         <div id="view-game3" class="view">
-            <div class="expanded-card">
-                <h2 class="expanded-title">Sky Islands</h2>
-                <div class="divider"></div>
-                
-                <div class="expanded-content">
-                    <p>
-                        <strong>Sky Islands</strong> is a beautifully structured platformer where players traverse suspended landmasses, solve platform-based challenges, collect coins, and outmaneuver hunting ghost enemies. Developed as a complete small-scale project, the game's core goal is to demonstrate architecture-level mastery of clean, performant Object-Oriented Programming (OOP) architectures and scalable gameplay frameworks within Unreal Engine 5.
-                    </p>
+            <div class="expanded-view-container">
+                <div class="view-navigation-bar">
+                    <button class="back-nav-btn" onclick="openView('view-home')">← Back to Dashboard</button>
+                    <span style="font-size:0.9rem; color:var(--text-muted);">Sky Islands Showcase</span>
                 </div>
 
-                <!-- Top Primary Screenshots: Start menu screen & tutorial start -->
+                <h2 class="expanded-title">Sky Islands</h2>
+                <p class="expanded-subtitle">
+                    <strong>Sky Islands</strong> is a beautifully structured platformer where players traverse suspended landmasses, solve platform-based challenges, collect coins, and outmaneuver hunting ghost enemies. Built to demonstrate architecture-level mastery of clean Object-Oriented Programming (OOP) architectures in UE5.
+                </p>
+
                 <div class="project-hero-grid">
                     <div class="project-hero-image-wrapper">
                         <img src="Pictures/Sky/SkyPhoto1.png" alt="Sky Islands Start Menu UI">
                         <div class="image-caption">Start Menu Interface</div>
                     </div>
                     <div class="project-hero-image-wrapper">
-                        <img src="Pictures/Sky/SkyPhoto2.png" alt="Sky Islands Tutorial Map Intro">
-                        <div class="image-caption">Tutorial And Game Intro</div>
+                        <img src="Pictures/Sky/SkyPhoto2.png" alt="Tutorial Start Platforming">
+                        <div class="image-caption">Tutorial Navigation Platforming Intro</div>
                     </div>
                 </div>
 
-                <!-- Mechanics Segment -->
-                <h2 class="mechanics-section-title">Framework Architecture & AI Design</h2>
-                <div class="divider" style="margin: 1.5rem auto 3rem;"></div>
-
+                <h3 class="mechanics-section-title">Framework Architecture & AI Design</h3>
                 <div class="mechanics-grid">
-                    <!-- Mechanic 1: Object-Oriented Blueprint Architecture -->
                     <div class="mechanic-card">
                         <h3>Clean Object-Oriented Blueprints</h3>
                         <p>
-                            To enforce highly reusable and optimized code, hazards and map interactives leverage custom parent-child Blueprint actor inheritance. Rather than rewriting identical functionalities, variables such as speed, damage, and projectile patterns are exposed on abstract base classes. This allows custom variants, like synchronized trap cannons, to be configured instantly.
+                            Hazards and map interactives leverage custom parent-child Blueprint actor inheritance. Variables such as speed, damage, and projectile patterns are exposed on abstract base classes for rapid iteration.
                         </p>
-                        <div class="mechanic-visual">
-                            <img src="Pictures/Sky/SkyPhoto3.png" alt="Inherited Obstacles & Turrets">
-                            <div class="image-caption">Child Blueprints Inheriting From Parent Actors</div>
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9;">
+                            <img src="Pictures/Sky/SkyPhoto3.png" alt="Inherited Hazards">
+                            <div class="image-caption">Moving Hazards & Trap Cannons</div>
                         </div>
                     </div>
 
-                    <!-- Mechanic 2: Blueprint Interfaces & Event Decoupling -->
                     <div class="mechanic-card">
                         <h3>Blueprint Interaction Interfaces</h3>
                         <p>
-                            All player interactions—such as activating ancient switches, unlocking portal gateways, and collecting floating currencies—are driven entirely by decoupled Blueprint Interfaces. This isolates player controller logic from world objects, eliminating direct casting issues, lowering reference memory load, and preventing circular dependencies.
+                            Player interactions (activating switches, unlocking portal gateways, collecting items) are driven entirely by decoupled Blueprint Interfaces to isolate player logic and prevent circular references.
                         </p>
-                        <div class="mechanic-visual">
+                        <div class="project-hero-image-wrapper" style="aspect-ratio:16/9;">
                             <img src="Pictures/Sky/SkyPhoto4.png" alt="Blueprint Interface Triggers">
-                            <div class="image-caption">Moving Hazards And Trap Cannons</div>
+                            <div class="image-caption">Interactive Trigger Switch & Gate Logic</div>
                         </div>
                     </div>
 
-                    <!-- Mechanic 3: AI Behavior Tree & Blackboard -->
                     <div class="mechanic-card" style="grid-column: 1 / -1;">
-                        <h3>UE5 Behavior Tree And Blackboard AI</h3>
+                        <h3>UE5 Behavior Tree & Blackboard AI</h3>
                         <p>
-                            The haunting ghost enemies are driven by an adaptive navigation system built using Unreal Engine 5's Blackboard and Behavior Tree suites. Path nodes are tracked dynamically on the blackboard, allowing enemies to shift smoothly between ambient area patrolling and chasing parameters when the player crosses customizable sensory detection spheres.
+                            Ghost enemies are driven by adaptive navigation built with Unreal Engine 5's Blackboard and Behavior Tree suites. Path nodes track dynamically, allowing enemies to shift smoothly between ambient area patrolling and chasing parameters.
                         </p>
-                        <div class="mechanic-visual" style="aspect-ratio: 21/9;">
-                            <img src="Pictures/Sky/SkyPhoto5.png" alt="UE5 Blackboard AI Patrol System">
-                            <div class="image-caption">Active AI Chase And Behavior States</div>
+                        <div class="project-hero-image-wrapper" style="aspect-ratio: 21/9;">
+                            <img src="Pictures/Sky/SkyPhoto5.png" alt="UE5 Blackboard AI Patrol">
+                            <div class="image-caption">Visualizing Active AI Chase & Behavior States</div>
                         </div>
                     </div>
                 </div>
-
-                <button class="back-btn" onclick="openView('view-home')">Back to Projects</button>
             </div>
         </div>
 
-    </main>
+    </div>
 
     <script>
-        // Smoothly scrolls user down from the Hero section to the Content Area
-        function scrollToContent() {
-            const contentArea = document.getElementById('main-content');
-            contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Handles navigation between views with transitions
         function openView(viewId) {
             const views = document.querySelectorAll('.view');
             
@@ -840,16 +801,31 @@
             });
 
             const targetView = document.getElementById(viewId);
-            if(targetView) {
+            if (targetView) {
                 targetView.classList.add('active');
                 
-                // Keep the flow continuous right below the persistent hero
-                document.getElementById('main-content').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
+                if (viewId === 'view-home') {
+                    if (window.innerWidth > 960) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = 'auto';
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    document.body.style.overflow = 'auto';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
         }
+
+        window.addEventListener('resize', () => {
+            const activeView = document.querySelector('.view.active');
+            if (activeView && activeView.id === 'view-home' && window.innerWidth > 960) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
     </script>
 </body>
 </html>
